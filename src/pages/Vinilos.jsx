@@ -1,10 +1,11 @@
-function Vinilos() {
+import ListaProductos from '../components/ListaProductos.jsx'
+
+export default function Vinilos({ onAgregarCarrito }) {
   return (
-    <section>
-      <h1>Vinilos</h1>
-      <p>Aquí aparecerán nuestros vinilos.</p>
-    </section>
+    <ListaProductos
+      titulo="Vinilos"
+      formato="Vinilo"
+      onAgregarCarrito={onAgregarCarrito}
+    />
   )
 }
-
-export default Vinilos

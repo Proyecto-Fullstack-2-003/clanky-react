@@ -1,10 +1,11 @@
-function CDs() {
+import ListaProductos from '../components/ListaProductos.jsx'
+
+export default function CDs({ onAgregarCarrito }) {
   return (
-    <section>
-      <h1>CDs</h1>
-      <p>Aquí aparecerán nuestros CDs.</p>
-    </section>
+    <ListaProductos
+      titulo="CDs"
+      formato="CD"
+      onAgregarCarrito={onAgregarCarrito}
+    />
   )
 }
-
-export default CDs

@@ -1,27 +1,10 @@
-import ProductoCard from '../components/ProductoCard.jsx'
-import { productosIniciales } from '../data/productosIniciales.js'
+import ListaProductos from '../components/ListaProductos.jsx'
 
-export default function Catalogo() {
+export default function Catalogo({ onAgregarCarrito }) {
   return (
-    <section>
-
-      <h1>Catálogo</h1>
-
-      <p>
-        Explora todos nuestros productos.
-      </p>
-
-      <div className="grilla-productos">
-
-        {productosIniciales.map((producto) => (
-          <ProductoCard
-            key={producto.id}
-            producto={producto}
-          />
-        ))}
-
-      </div>
-
-    </section>
+    <ListaProductos
+      titulo="Catálogo"
+      onAgregarCarrito={onAgregarCarrito}
+    />
   )
 }

@@ -1,10 +1,11 @@
-function Merch() {
+import ListaProductos from '../components/ListaProductos.jsx'
+
+export default function Merch({ onAgregarCarrito }) {
   return (
-    <section>
-      <h1>Merch</h1>
-      <p>Aquí aparecerá nuestro merchandising.</p>
-    </section>
+    <ListaProductos
+      titulo="Merch"
+      formato="Merch"
+      onAgregarCarrito={onAgregarCarrito}
+    />
   )
 }
-
-export default Merch
