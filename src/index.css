@@ -238,6 +238,20 @@ h1,
   font-weight: bold;
 }
 
+/* LOGIN */
+.nav.login-tabs{
+  --bs-nav-pills-link-active-bg: var(--clanky-rojo);
+  --bs-nav-pills-link-active-color: var(--clanky-blanco);
+  --bs-nav-link-color: var(--clanky-negro);
+  --bs-nav-link-hover-color: var(--clanky-rojo);
+}
+
+.login-tabs .nav-link {
+  font-weight: bold;
+}
+
+
+
 /* RESPONSIVE */
 
 @media (min-width: 768px) {
