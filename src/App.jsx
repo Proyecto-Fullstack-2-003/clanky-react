@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-
+import Admin from './pages/Admin.jsx'
 import Inicio from './pages/Inicio.jsx'
 import Catalogo from './pages/Catalogo.jsx'
 import Vinilos from './pages/Vinilos.jsx'
@@ -278,6 +278,13 @@ export default function App() {
     case '#/login':
       pagina = <Login onLogin={iniciarSesion} />
       break
+
+    case '#/admin':
+      pagina= sesion?.tipo==='admin'?(
+        <Admin sesion={sesion}/>) : (
+        <Login onLogin={iniciarSesion}/>  
+      )
+      break  
 
     case '#/':
     default:

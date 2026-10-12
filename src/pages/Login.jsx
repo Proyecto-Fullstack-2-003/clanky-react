@@ -1,5 +1,9 @@
 import {useState} from "react";
 import LoginCliente from "../components/LoginCliente";
+import LoginAdmin from "../components/LoginAdmin";
+
+
+
 
 function Login({onLogin}) {
   const[pestaña, setPestaña]= useState('cliente')
@@ -38,7 +42,7 @@ function Login({onLogin}) {
             </button>
           </div>
           {pestaña=== 'cliente'&& <LoginCliente onLogin={onLogin}/>}
-          {pestaña=== 'admin'&& <p>Aqui ira el login de administrador</p>}
+          {pestaña=== 'admin'&& <LoginAdmin onLogin={onLogin} />}
         </div>
       </div>
     </section>
