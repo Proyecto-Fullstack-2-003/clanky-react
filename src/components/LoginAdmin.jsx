@@ -9,7 +9,7 @@ function LoginAdmin({onLogin}){
     const[password, setPassword]= useState('')
     const[mensaje,setMensaje]=useState(null)
 
-    function manejarEnvio({evento}){
+    function manejarEnvio(evento){
         evento.preventDefault()
 
         if(usuario.trim()=== ADMIN_USUARIO&&password===ADMIN_PASSWORD){
@@ -56,7 +56,7 @@ return (
         </div>
 
         {mensaje &&(
-            <div className={'alert alert-${mensaje.tipo} py-2 small'}>
+            <div className={`alert alert- ${mensaje.tipo} py-2 small`}>
                 {mensaje.texto}
             </div>    
         )}

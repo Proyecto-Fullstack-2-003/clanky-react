@@ -23,6 +23,13 @@ export default function Header({ cantidadCarrito = 0 ,sesion, onCerrarSesion}) {
           </div>
 
           <div className="navbar-icons">
+          {sesion?.tipo ==='admin'&&(
+            <a href="#/admin">
+              <span className="btn btn-warning btn-sm fw-bold text-dark">
+                <i className="bi bi-gear-fill"></i> Administracion
+              </span>
+            </a>
+          )}
             <a href="#/carrito" aria-label="Carrito">
               <i className="bi bi-cart3" aria-hidden="true"></i>
 
