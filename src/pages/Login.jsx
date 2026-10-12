@@ -1,5 +1,5 @@
 import {useState} from "react";
-
+import LoginCliente from "../components/LoginCliente";
 
 function Login() {
   const[pestaña, setPestaña]= useState('cliente')
@@ -37,7 +37,7 @@ function Login() {
             
             </button>
           </div>
-          {pestaña=== 'cliente'&& <p>Aqui ira el login de cliente</p>}
+          {pestaña=== 'cliente'&& <LoginCliente />}
           {pestaña=== 'admin'&& <p>Aqui ira el login de administrador</p>}
         </div>
       </div>
