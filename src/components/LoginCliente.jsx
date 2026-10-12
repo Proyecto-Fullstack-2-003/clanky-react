@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { evaluarReglasContraseña } from "../utils/validacionesLogin.js";
+import {emailEsValido,evaluarReglasContraseña,contraseñaEsValida} from "../utils/validacionesLogin.js";
 
 const listaReglas = [
     { clave: 'length', texto: "Minimo 8 caracteres" },
@@ -8,14 +8,28 @@ const listaReglas = [
     { clave: 'numero', texto: "Al menos un número" },
     { clave: 'especial', texto: "Al menos un carácter especial" }
 ]
-function LoginCliente() {
+function LoginCliente({onLogin}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const reglas = evaluarReglasContraseña(password)
+    const [error, setError] = useState('')
 
     function manejarEnvio(evento) {
         evento.preventDefault()
-        console.log('Enviado: ', email)
+        setError('')
+
+        const emailLimpio= email.trim()
+
+        if (!emailEsValido(emailLimpio)){
+            setError('Ingresa un email válido.')
+            return
+        }
+        if (!contraseñaEsValida(password)){
+            setError('La contraseña no cumple con los requisitos.')
+            return
+        }
+        onLogin({tipo: 'cliente' , email: emailLimpio})
+        window.location.hash= '#/'
     }
 
     return (
@@ -58,6 +72,8 @@ function LoginCliente() {
                     </li>
                 ))}
             </ul>
+
+            {error && <div className="alert alert-danger py-2 small">{error}</div>}
             <button type="submit" className="btn btn-clanky w-100 py-2">
                 Iniciar sesión
             </button>

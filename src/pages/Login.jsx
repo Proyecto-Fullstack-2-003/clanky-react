@@ -1,7 +1,7 @@
 import {useState} from "react";
 import LoginCliente from "../components/LoginCliente";
 
-function Login() {
+function Login({onLogin}) {
   const[pestaña, setPestaña]= useState('cliente')
 
   return (
@@ -37,7 +37,7 @@ function Login() {
             
             </button>
           </div>
-          {pestaña=== 'cliente'&& <LoginCliente />}
+          {pestaña=== 'cliente'&& <LoginCliente onLogin={onLogin}/>}
           {pestaña=== 'admin'&& <p>Aqui ira el login de administrador</p>}
         </div>
       </div>

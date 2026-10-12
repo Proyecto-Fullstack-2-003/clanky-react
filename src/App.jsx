@@ -45,6 +45,24 @@ export default function App() {
     }
   })
 
+  const [sesion, setSesion]= useState(() => {
+    try {
+      const guardada = localStorage.getItem('SESION_CLANKY')
+      return guardada ? JSON.parse(guardada): null
+    } catch {
+      return null
+    }
+  })
+  function iniciarSesion(datos){
+    localStorage.setItem('SESION_CLANKY', JSON.stringify(datos))
+    setSesion(datos)
+  }
+
+  function cerrarSesion(){
+    localStorage.removeItem('SESION_CLANKY')
+    setSesion(null)
+    window.location.hash = '#/'
+  }
   // Guardar el carrito cuando cambia.
   useEffect(() => {
     localStorage.setItem(
@@ -258,7 +276,7 @@ export default function App() {
       break
 
     case '#/login':
-      pagina = <Login />
+      pagina = <Login onLogin={iniciarSesion} />
       break
 
     case '#/':
@@ -269,7 +287,7 @@ export default function App() {
 
   return (
     <>
-      <Header cantidadCarrito={cantidadCarrito} />
+      <Header cantidadCarrito={cantidadCarrito} sesion={sesion} onCerrarSesion={cerrarSesion} />
 
       <main>
         {pagina}

@@ -1,5 +1,5 @@
 
-export default function Header({ cantidadCarrito = 0 }) {
+export default function Header({ cantidadCarrito = 0 ,sesion, onCerrarSesion}) {
   return (
     <header>
       <nav className="navbar-clanky">
@@ -37,6 +37,15 @@ export default function Header({ cantidadCarrito = 0 }) {
                 aria-hidden="true"
               ></i>
             </a>
+            {sesion && (
+              <button
+                type="button"
+                className="btn btn-outline-light btn-sm"
+                onClick={onCerrarSesion}
+              >
+                Salir
+              </button>
+            )}
           </div>
 
         </div>
