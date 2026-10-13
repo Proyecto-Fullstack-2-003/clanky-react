@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
+import { useTienda } from './context/TiendaContext.jsx'
+import { detalleCarrito, resumenCarrito } from './store/tiendaReducer.js'
 import Admin from './pages/Admin.jsx'
 import Inicio from './pages/Inicio.jsx'
 import Catalogo from './pages/Catalogo.jsx'
@@ -20,21 +22,9 @@ export default function App() {
     window.location.hash || '#/'
   )
 
-  const [carrito, setCarrito] = useState(() => {
-    try {
-      const guardado = localStorage.getItem('CARRITO_DISQUERIA')
-      const productos = guardado ? JSON.parse(guardado) : []
+  const { estado, dispatch } = useTienda()
 
-      if (!Array.isArray(productos)) return []
-
-      return productos.map((producto) => ({
-        ...producto,
-        cantidad: Math.max(1, Number(producto.cantidad) || 1)
-      }))
-    } catch {
-      return []
-    }
-  })
+  const carrito = detalleCarrito(estado)
 
   const [ultimaCompra, setUltimaCompra] = useState(() => {
     try {
@@ -45,107 +35,47 @@ export default function App() {
     }
   })
 
-  const [sesion, setSesion]= useState(() => {
+  const [sesion, setSesion] = useState(() => {
     try {
       const guardada = localStorage.getItem('SESION_CLANKY')
-      return guardada ? JSON.parse(guardada): null
+      return guardada ? JSON.parse(guardada) : null
     } catch {
       return null
     }
   })
-  function iniciarSesion(datos){
+  function iniciarSesion(datos) {
     localStorage.setItem('SESION_CLANKY', JSON.stringify(datos))
     setSesion(datos)
   }
 
-  function cerrarSesion(){
+  function cerrarSesion() {
     localStorage.removeItem('SESION_CLANKY')
     setSesion(null)
     window.location.hash = '#/'
   }
-  // Guardar el carrito cuando cambia.
-  useEffect(() => {
-    localStorage.setItem(
-      'CARRITO_DISQUERIA',
-      JSON.stringify(carrito)
-    )
-  }, [carrito])
+
 
   // Agregar productos sin superar el stock disponible.
   function agregarAlCarrito(producto) {
-    if (!producto || Number(producto.stock) <= 0) {
-      window.alert('Este producto no tiene stock disponible.')
-      return
-    }
-
-    const existente = carrito.find(
-      (item) => item.id === producto.id
-    )
-
-    if (existente) {
-      const cantidadActual = Number(existente.cantidad) || 1
-
-      if (cantidadActual >= Number(producto.stock)) {
-        window.alert(
-          `No puedes agregar más unidades. Stock disponible: ${producto.stock}`
-        )
-        return
-      }
-
-      setCarrito((actual) =>
-        actual.map((item) =>
-          item.id === producto.id
-            ? { ...item, cantidad: (Number(item.cantidad) || 1) + 1 }
-            : item
-        )
-      )
-    } else {
-      setCarrito((actual) => [
-        ...actual,
-        { ...producto, cantidad: 1 }
-      ])
-    }
+    dispatch({ type: 'AGREGAR', id: producto.id })
   }
 
   // Modificar cantidades del carrito.
   function cambiarCantidad(id, cambio) {
-    const producto = carrito.find((item) => item.id === id)
+    const item = carrito.find((producto) => producto.id === id)
+    if (!item) return
 
-    if (!producto) return
-
-    const cantidadActual = Number(producto.cantidad) || 1
-    const nuevaCantidad = cantidadActual + cambio
-
-    if (nuevaCantidad > Number(producto.stock)) {
-      window.alert(
-        `Solo hay ${producto.stock} unidades disponibles.`
-      )
-      return
-    }
-
-    if (nuevaCantidad <= 0) {
-      eliminarProducto(id)
-      return
-    }
-
-    setCarrito((actual) =>
-      actual.map((item) =>
-        item.id === id
-          ? { ...item, cantidad: nuevaCantidad }
-          : item
-      )
-    )
+    dispatch({ type: 'CANTIDAD', ID, CANTIDAD: item.cantidad + cambio })
   }
 
   function eliminarProducto(id) {
-    setCarrito((actual) =>
-      actual.filter((item) => item.id !== id)
-    )
+    dispatch({ type: 'QUITAR', id })
   }
 
   function vaciarCarrito() {
-    setCarrito([])
+    dispatch({ type: 'VACIAR' })
   }
+
 
   // Registrar el resultado de la compra simulada.
   function finalizarCompra(datosCheckout) {
@@ -179,7 +109,7 @@ export default function App() {
 
     // Solo vaciamos el carrito si la compra fue aprobada.
     if (aprobada) {
-      setCarrito([])
+      dispatch({ type: 'COMPRAR' })
     }
 
     window.location.hash = aprobada
@@ -200,11 +130,7 @@ export default function App() {
     }
   }, [])
 
-  const cantidadCarrito = carrito.reduce(
-    (total, producto) =>
-      total + Number(producto.cantidad || 0),
-    0
-  )
+  const cantidadCarrito = resumenCarrito(estado).unidades
 
   let pagina
 
@@ -280,11 +206,11 @@ export default function App() {
       break
 
     case '#/admin':
-      pagina= sesion?.tipo==='admin'?(
-        <Admin sesion={sesion}/>) : (
-        <Login onLogin={iniciarSesion}/>  
+      pagina = sesion?.tipo === 'admin' ? (
+        <Admin sesion={sesion} />) : (
+        <Login onLogin={iniciarSesion} />
       )
-      break  
+      break
 
     case '#/':
     default:
@@ -297,6 +223,22 @@ export default function App() {
       <Header cantidadCarrito={cantidadCarrito} sesion={sesion} onCerrarSesion={cerrarSesion} />
 
       <main>
+        {estado.aviso && (
+          <div className="container">
+            <div
+              className={`alert alert-${estado.aviso.tipo} alert-dismissible mt-3`}
+              role="status"
+            >
+              {estado.aviso.texto}
+
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Cerrar aviso"
+                onClick={() => dispatch({ type: 'CERRAR_AVISO' })}
+              ></button>
+            </div>
+          </div>)}
         {pagina}
       </main>
 
