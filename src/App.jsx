@@ -65,7 +65,7 @@ export default function App() {
     const item = carrito.find((producto) => producto.id === id)
     if (!item) return
 
-    dispatch({ type: 'CANTIDAD', ID, CANTIDAD: item.cantidad + cambio })
+    dispatch({ type: 'CANTIDAD', id, cantidad: item.cantidad + cambio })
   }
 
   function eliminarProducto(id) {

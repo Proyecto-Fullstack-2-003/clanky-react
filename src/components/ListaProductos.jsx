@@ -1,18 +1,19 @@
-
+import {useTienda} from '../context/TiendaContext.jsx'
 import { useState } from 'react'
 import ProductoCard from './ProductoCard.jsx'
-import { productosIniciales } from '../data/productosIniciales.js'
+
 
 export default function ListaProductos({
   titulo,
   formato,
   onAgregarCarrito
 }) {
+  const{estado}= useTienda()
   const [busqueda, setBusqueda] = useState('')
   const [orden, setOrden] = useState('todos')
 
   // 1. Filtrar por formato, si la página lo requiere.
-  const productosBase = productosIniciales.filter((producto) => {
+  const productosBase = estado.productos.filter((producto) => {
     if (!formato) {
       return true
     }

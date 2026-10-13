@@ -61,7 +61,10 @@ export function tiendaReducer(estado, accion) {
         case 'CANTIDAD': {
             const producto = estado.productos.find((p) => p.id === accion.id)
 
-            if (!producto || !Number.isInteger(accion.cantidad) || accion.cantidad < 0 || accion.cantidad > producto.stock) {
+            if (!producto ||
+                !Number.isInteger(accion.cantidad) ||
+                accion.cantidad < 0 ||
+                accion.cantidad > producto.stock) {
                 return conAviso(
                     estado,
                     'La cantidad debe ser un entero y no superar el stock.', 'warning'
