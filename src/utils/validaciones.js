@@ -36,7 +36,7 @@ export function validarCheckout(datos) {
 
 export const FORMATOS = ['Vinilo', 'CD', 'Merch']
 
-export function validarProductos(datos, productos, id = null) {
+export function validarProducto(datos, productos, id = null) {
   const errores = {}
   const nombre = datos.nombre.trim()
 
@@ -65,7 +65,7 @@ if (
 }
 if (
   String(datos.stock).trim() === '' ||
-  !Number.isInteger(Numbre(datos.stock)) ||
+  !Number.isInteger(Number(datos.stock)) ||
   Number(datos.stock) < 0
 ) {
   errores.stock = 'El stock debe ser un entero mayor o igual a cero'

@@ -1,5 +1,5 @@
 export function formatearPrecio(valor) {
-    return `$${Number(valor).toLocaleString('es-CL')}`
+    return `$${Number(valor).toLocaleString('es-CL')}`;
 }
 
 
