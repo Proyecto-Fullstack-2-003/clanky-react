@@ -46,7 +46,7 @@ return (
         </div>
 
         <div className="mb-3">
-            <label htmlFor="admin-password" className="from-label fw-semibold">Contraseña</label>
+            <label htmlFor="admin-password" className="form-label fw-semibold">Contraseña</label>
             <input
                 id="admin-password"
                 type="password"
@@ -56,7 +56,7 @@ return (
         </div>
 
         {mensaje &&(
-            <div className={`alert alert- ${mensaje.tipo} py-2 small`}>
+            <div className={`alert alert-${mensaje.tipo} py-2 small`}>
                 {mensaje.texto}
             </div>    
         )}

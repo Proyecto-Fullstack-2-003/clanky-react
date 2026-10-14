@@ -72,7 +72,7 @@ export function tiendaReducer(estado, accion) {
             }
             const carrito = estado.carrito
                 .map((i) =>
-                    i.id === accion.id ? { ...i, cantidad: accion.cantidad } : 1
+                    i.id === accion.id ? { ...i, cantidad: accion.cantidad } : i
                 )
                 .filter((i) => i.cantidad > 0)
             return { ...estado, carrito, aviso: null }
@@ -127,7 +127,7 @@ export function tiendaReducer(estado, accion) {
             }
             if (
                 accion.id !== null &&
-                !estado.producto.some((p) => p.id === accion.id)
+                !estado.productos.some((p) => p.id === accion.id)
             ) {
                 return conAviso(estado, 'El producto ya no existe.', 'warning')
             }

@@ -15,7 +15,7 @@ function Login({onLogin}) {
         style={{maxWidth: '480px'}}
       >
         <div className="card-body p-4">
-          <div className="tex-center mb-4">
+          <div className="text-center mb-4">
             <i
               className="bi bi-person-circle fs-1"
               style={{color: 'var(--clanky-rojo)'}}
@@ -23,10 +23,10 @@ function Login({onLogin}) {
             <h2 className= "h3 mt-2 mb-2">Bienvenido a Clanky</h2>
         </div>
           
-          <div className="nav nav-pills nav-fill-login-tabs mb-4">
+          <div className="nav nav-pills nav-fill login-tabs mb-4">
             <button
               type="button"
-              className={'nav-link '+pestaña ==='cliente'?'active':''} 
+              className={`nav-link ${pestaña === 'cliente' ? 'active' : ''}`} 
               onClick={() => setPestaña('cliente')}> 
 
             <i className="bi bi-person-fill me-1"></i> Cliente    
@@ -34,7 +34,7 @@ function Login({onLogin}) {
 
             <button
               type="button"
-              className={'nav-link '+pestaña ==='admin'?'active':''} 
+              className={`nav-link ${pestaña === 'admin' ? 'active' : ''}`} 
               onClick={() => setPestaña('admin')}>
               <i className="bi bi-shield-lock-fill me-1"></i> Administrador 
             
