@@ -286,3 +286,243 @@ h1,
     padding: 1.25rem 0.75rem;
   }
 }
+
+
+/* =========================
+   INICIO DE CLANKY
+   ========================= */
+
+.inicio {
+  width: 100%;
+}
+
+.inicio-hero {
+  position: relative;
+  min-height: 450px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #111111;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.inicio-hero-imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.55;
+}
+
+.inicio-hero-sombra {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.48) 65%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+.inicio-hero-contenido {
+  position: relative;
+  z-index: 1;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  padding-bottom: 5rem;
+}
+
+.inicio-hero-contenido h1 {
+  max-width: 850px;
+  color: #ffffff;
+  text-align: left;
+  line-height: 1.12;
+  text-shadow: 2px 2px 5px #000000;
+}
+
+.inicio-hero-contenido p {
+  max-width: 760px;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px #000000;
+}
+
+.inicio-hero-boton {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  padding: 0.75rem 1.2rem;
+  border: 2px solid #111111;
+  box-shadow: 3px 3px 0 #111111;
+}
+
+/* Controles del carrusel */
+
+.inicio-control {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.inicio-control:hover {
+  background-color: var(--clanky-rojo);
+}
+
+.inicio-control-anterior {
+  left: 1rem;
+}
+
+.inicio-control-siguiente {
+  right: 1rem;
+}
+
+.inicio-indicadores {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.inicio-indicador {
+  width: 32px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  opacity: 0.65;
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.inicio-indicador.activo {
+  background-color: var(--clanky-amarillo);
+  opacity: 1;
+}
+
+/* Título de las categorías */
+
+.inicio-titulo-categorias {
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+/* Tarjetas de las categorías */
+
+.inicio-enlace-categoria {
+  display: block;
+  height: 100%;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.inicio-tarjeta-categoria {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #111111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.inicio-tarjeta-categoria img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.inicio-enlace-categoria:hover .inicio-tarjeta-categoria {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.inicio-enlace-categoria:hover .inicio-tarjeta-categoria img {
+  transform: scale(1.06);
+}
+
+.inicio-categoria-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.inicio-categoria-overlay h3 {
+  margin: 0;
+  padding: 0.7rem 1.4rem;
+  background-color: rgba(33, 37, 41, 0.88);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 767px) {
+  .inicio-hero,
+  .inicio-hero-contenido {
+    min-height: 390px;
+  }
+
+  .inicio-hero-contenido {
+    padding: 1.5rem 3.5rem 4.5rem;
+  }
+
+  .inicio-hero-contenido h1 {
+    font-size: 2rem;
+  }
+
+  .inicio-hero-contenido p {
+    font-size: 1rem;
+  }
+
+  .inicio-control {
+    width: 34px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .inicio-control-anterior {
+    left: 0.4rem;
+  }
+
+  .inicio-control-siguiente {
+    right: 0.4rem;
+  }
+
+  .inicio-indicadores {
+    bottom: 0.9rem;
+  }
+}
