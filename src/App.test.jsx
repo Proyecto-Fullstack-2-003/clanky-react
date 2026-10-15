@@ -21,12 +21,12 @@ beforeEach(() => {
 
 describe('Integración de la aplicación Clanky', () => {
     it('muestra la página de inicio', () => {
-        renderApp()
+    renderApp()
 
-        expect(
-            screen.getByRole('heading', { name: 'Bienvenido a Clanky' })
-        ).toBeInTheDocument()
-    })
+    expect(
+        screen.getByRole('heading', { name: 'Clásicos en CD' })
+    ).toBeInTheDocument()
+})
 
     it('permite navegar desde el inicio hasta el catálogo', async () => {
         const user = userEvent.setup()
@@ -34,7 +34,7 @@ describe('Integración de la aplicación Clanky', () => {
         renderApp()
 
         await user.click(
-            screen.getByRole('link', { name: 'Ver catálogo' })
+            screen.getByRole('link', { name: /Ver catálogo/i })
         )
 
         expect(
