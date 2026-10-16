@@ -139,6 +139,7 @@ describe('Integración de la aplicación Clanky', () => {
 
         expect(localStorage.getItem('CLANKY_ULTIMA_COMPRA')).not.toBeNull()
     })
+
 })
 
 it('muestra la página de inicio al entrar en la ruta principal', () => {
